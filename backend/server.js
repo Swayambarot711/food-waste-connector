@@ -3,9 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
-const foodItemRoutes = require('./routes/foodItemRoutes');
-const reservationRoutes = require('./routes/reservationRoutes');
-
 const app = express();
 
 // Connect to DB
@@ -18,13 +15,16 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/dining-halls', require('./routes/diningHallRoutes'));
-app.use('/api/food-items', foodItemRoutes);
-app.use('/api/reservations', reservationRoutes);
 
-// Test Route
+app.use('/api/food-items', require('./routes/foodItemRoutes'));
+app.use('/api/reservations', require('./routes/reservationRoutes'));
+
+app.use('/api/offers', require('./routes/offerRoutes'));
+app.use('/api/notifications', require('./routes/notificationRoutes'));
+
+// Test routes
 app.get('/', (req, res) => {
   res.json({
     message: 'Food Waste Connector API is running!',
@@ -35,9 +35,16 @@ app.get('/', (req, res) => {
       profile: '/api/auth/me',
       diningHalls: '/api/dining-halls',
       foodItems: '/api/food-items',
-      reservations: '/api/reservations'
+      reservations: '/api/reservations',
+      offers: '/api/offers',
+      notifications: '/api/notifications',
+      test: '/test'
     }
   });
+});
+
+app.post('/test', (req, res) => {
+  res.json({ works: true });
 });
 
 const PORT = process.env.PORT || 5000;
