@@ -15,15 +15,12 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/dining-halls', require('./routes/diningHallRoutes'));
-
-app.use('/api/food-items', require('./routes/foodItemRoutes'));
-app.use('/api/reservations', require('./routes/reservationRoutes'));
-
-app.use('/api/offers', require('./routes/offerRoutes'));
-app.use('/api/notifications', require('./routes/notificationRoutes'));
-
+ app.use('/api/auth', require('./routes/authRoutes'));
+ app.use('/api/dining-halls', require('./routes/diningHallRoutes'));
+ app.use('/api/food-items', require('./routes/foodItemRoutes'));
+ app.use('/api/reservations', require('./routes/reservationRoutes'));
+ app.use('/api/offers', require('./routes/offerRoutes'));
+ app.use('/api/notifications', require('./routes/notificationRoutes'));
 // Test routes
 app.get('/', (req, res) => {
   res.json({
